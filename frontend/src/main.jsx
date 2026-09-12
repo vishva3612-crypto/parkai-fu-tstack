@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {MapPin,Car,CalendarCheck,Star,Zap,User,Menu,Navigation,Clock,ShieldCheck,RefreshCw} from 'lucide-react';
 import './style.css';
-const API='http://localhost:5000/api';
+const API='https://parkai-fu-tstack.onrender.com/api';
 function App(){
  const [tab,setTab]=useState('home'),[parks,setParks]=useState([]),[bookings,setBookings]=useState([]),[dest,setDest]=useState('Chennai Central'),[rec,setRec]=useState(null),[loading,setLoading]=useState(false),[toast,setToast]=useState('');
  const load=async()=>{setParks(await (await fetch(API+'/parking')).json());setBookings(await (await fetch(API+'/bookings')).json())};
