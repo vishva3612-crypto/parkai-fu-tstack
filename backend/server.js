@@ -16,4 +16,4 @@ app.get('/api/recommend',(req,res)=>{let ranked=[...parks].sort((a,b)=>score(b)-
 app.get('/api/bookings',(req,res)=>res.json(bookings));
 app.post('/api/bookings',(req,res)=>{const p=parks.find(x=>x.id===Number(req.body.parkingId)); if(!p||p.available<1)return res.status(409).json({error:'Parking unavailable'}); p.available--; const b={id:crypto.randomUUID(),parkingId:p.id,parkingName:p.name,slot:`A-${String((p.total-p.available)).padStart(2,'0')}`,arrival:req.body.arrival||'Today 5:30 PM',price:p.price,status:'CONFIRMED',createdAt:new Date().toISOString()}; bookings.push(b); res.status(201).json(b)});
 app.patch('/api/parking/:id',(req,res)=>{const p=parks.find(x=>x.id===Number(req.params.id)); if(!p)return res.sendStatus(404); Object.assign(p,req.body); res.json(p)});
-app.listen(port,()=>console.log(`ParkAI backend running on http://localhost:${port}`));
+app.listen(process.env.PORT || port,()=>console.log('ParkAI backend running'));
